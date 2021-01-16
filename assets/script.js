@@ -1,14 +1,25 @@
-//selecting timer element by id
+//selecting elements by id
 var timeEl = document.querySelector("#time");
+var quizEl = document.querySelector("#quiz");
+var startEl = document.querySelector("#start");
+var endEl = document.querySelector("#end");
+var correctnessEl = document.querySelector("#correctness");
+
+document.querySelector("#startBtn").addEventListener("click", function () {
+    quizEl.removeAttribute("class", "hide");
+    startEl.setAttribute("class", "hide");
+    setTime()
+});
 
 var secondsLeft = 60;
 var timerInterval;
 
 function setTime() {
+    timeEl.textContent = secondsLeft;
     // Sets interval in variable
     timerInterval = setInterval(function () {
         secondsLeft--;
-        timeEl.textContent = "Time: " + secondsLeft;
+        timeEl.textContent = secondsLeft;
 
         if (secondsLeft === 0) {
             endGame();
@@ -21,7 +32,7 @@ function endGame() {
     clearInterval(timerInterval);
 }
 
-setTime()
+
 
 quizContainer.addEventListener("click", function (event) {
     var element = event.target;

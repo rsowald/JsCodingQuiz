@@ -10,20 +10,29 @@ header {
     max-width: 600px;
 }
 
+h1 {
+    margin-bottom: 20px;
+}
+
 .hide {
     display: none;
 }
 
-#time {
+#timerText {
     float: right;
 }
 
-.quiz {
+#start {
     text-align: center;
     margin-top: 50px;
 }
 
-.quiz button {
+#quiz {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#quiz button {
     display: block;
     margin-bottom: 5px;
     font-weight: bolder;
