@@ -1,1 +1,17 @@
-.hide
+header {
+    background-color: rgb(245, 236, 236);
+    font-family: 'Roboto', sans-serif;
+    border-bottom: solid black 1px;
+    padding: 10px;
+    margin: 0;
+}
+
+.hide {}
+
+#time {
+    float: right;
+}
+
+.quiz {
+    margin: 15px;
+}
