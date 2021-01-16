@@ -6,12 +6,25 @@ header {
     margin: 0;
 }
 
-.hide {}
+.container {
+    max-width: 600px;
+}
+
+.hide {
+    display: none;
+}
 
 #time {
     float: right;
 }
 
 .quiz {
-    margin: 15px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.quiz button {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bolder;
 }

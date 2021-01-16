@@ -15,21 +15,34 @@
 
 <body>
     <!-- header  -->
-    <header>
-        <a href="local storage" class="highscores">View Highscores</a>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" src="">View Highscores</a>
         <span id="time"></span>
-    </header>
-    <fieldset class="quiz">
-        <legend>What value does the first index in an array have?</legend>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-
-
-
-    </fieldset>
-
+    </nav>
+    <main class="container">
+        <div class="row">
+            <div class="col align-self-center">
+                <section id="quiz" class="hide">
+                    <h1>What value does the first index in an array have?</h1>
+                    <!-- <div class="btn-group-vertical"> -->
+                    <button type="button" class="btn btn-outline-info">Hey here is some text</button>
+                    <button type="button" class="btn btn-outline-info">Some more text</button>
+                    <button type="button" class="btn btn-outline-info">This is the way</button>
+                    <button type="button" class="btn btn-outline-info">Star Trek Sucks</button>
+                    <!-- </div> -->
+                </section>
+                <section id="start">
+                    <button id="startBtn">Start Quiz</button>
+                </section>
+                <section id="end" class="hide">
+                    <input id="playerName">
+                    <button id="submit">Submit</button>
+                </section>
+                <div id="correctness" class="alert alert-light" role="alert">
+                </div>
+            </div>
+        </div>
+    </main>
     <script src="./assets/script.js"></script>
 </body>
 
