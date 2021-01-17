@@ -33,11 +33,11 @@ function setTime() {
 //TODO: on click in quiz div, switch to next question
 //TODO: on click in quiz div, check for correct answer and display correctness div
 //TODO: decrement seconds left for wrong answer
-//TODO: clear interval and show end game div if all questions have been answered
+//TODO: clear interval, hide quiz div, and show end game div if all questions have been answered
 
 // Calls function to show game over div
 function endGame() {
-    //TODO: show end game div
+    //TODO: hide quiz div and show end game div
     // Stops execution of action at set interval
     clearInterval(timerInterval);
 }
