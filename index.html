@@ -22,8 +22,11 @@
 <body>
     <!-- header  -->
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" src="">View Highscores</a>
-        <span id="timerText">Time: <span id="time">--</span></span>
+        <button class="navbar-brand btn btn-link" id="highScoreBtn" data-toggle="modal" data-target="#highscores">🏆
+            View
+            High
+            Scores</button>
+        <span id="timerText">⏱ Time: <span id="time">--</span></span>
     </nav>
     <main class="container">
         <div class="row">
@@ -50,14 +53,11 @@
                 </div>
                 <!-- Or maybe add a high scores modal instead of a separate high scores page? -->
                 <!-- Vertically centered scrollable modal -->
-                <div class="modal fade" tabindex="-1">
+                <div class="modal fade" tabindex="-1" id="highscores">
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h2 class="modal-title">High Scores</h2>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
                             </div>
                             <div class="modal-body">
                                 <p>Local Storage of high scores</p>

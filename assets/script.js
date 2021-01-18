@@ -4,6 +4,7 @@ var quizEl = document.querySelector("#quiz");
 var startEl = document.querySelector("#start");
 var endEl = document.querySelector("#end");
 var correctnessEl = document.querySelector("#correctness");
+
 //TODO: add query selectors for high scores page
 
 //TODO: fetch high scores from local storage and display on high scores page
@@ -30,6 +31,7 @@ function setTime() {
     }, 1000);
 }
 
+
 //TODO: on click in quiz div, switch to next question
 //TODO: on click in quiz div, check for correct answer and display correctness div
 //TODO: decrement seconds left for wrong answer
@@ -38,7 +40,7 @@ function setTime() {
 // Calls function to show game over div
 function endGame() {
     //TODO: hide quiz div and show end game div
-    // Stops execution of action at set interval
+    // Stops timer
     clearInterval(timerInterval);
 }
 
