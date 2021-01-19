@@ -11,11 +11,39 @@ var endEl = document.querySelector("#end");
 var submitEl = document.querySelector("#submit");
 var playerInitials = document.querySelector("#playerName");
 var correctnessEl = document.querySelector("#correctness");
+var highScoresEl = document.querySelector("#highScores");
 var resetHighscores = document.querySelector("#reset");
 
 var currentQuestion = -1;
+var highScores = [];
+
 
 //TODO: fetch high scores from local storage and display on high scores page
+function init() {
+    // Get stored scores from localStorage
+    var storedScores = JSON.parse(localStorage.getItem("score"));
+
+    // If scores were retrieved from localStorage, update the highScores array with it
+    if (storedScores !== null) {
+        highScores = storedScores;
+    }
+
+    // Render scores to the high score modal in DOM
+    renderHighScores();
+}
+
+// The following function renders items in scores list as <li> elements
+function renderHighScores() {
+    // Render a new li for each score
+    for (var i = 0; i < highScores.length; i++) {
+        var highScore = highScores[i];
+
+        var li = document.createElement("li");
+        li.textContent = highScore;
+
+        highScoresEl.appendChild(li);
+    }
+}
 
 //Pressing start button hides landing div, shows quiz div, and starts timer
 document.querySelector("#startBtn").addEventListener("click", function () {
@@ -142,7 +170,6 @@ function endGame() {
     clearInterval(timerInterval);
 }
 
-highScores = []
 
 //grabs user info from end game div and writes to local storage
 function storeHighScores() {
@@ -166,10 +193,12 @@ submitEl.addEventListener("click", function (event) {
 
     // Store updated scores in localStorage, re-render the list
     storeHighScores();
-    console.log(score);
-    // renderHighScores();
+    renderHighScores();
+    //todo: debug stored high scores rendering twice
 });
 
 //TODO: on click in high scores page, clear local storage
 //TODO: on click in high scores page, go back to landing div
+// calls initialize function on page load
+init();
 
