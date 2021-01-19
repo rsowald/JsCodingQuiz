@@ -8,6 +8,8 @@ var btn2 = document.querySelector("#a2");
 var btn3 = document.querySelector("#a3");
 var startEl = document.querySelector("#start");
 var endEl = document.querySelector("#end");
+var submitEl = document.querySelector("#submit");
+var playerInitials = document.querySelector("#playerName");
 var correctnessEl = document.querySelector("#correctness");
 var resetHighscores = document.querySelector("#reset");
 
@@ -125,10 +127,10 @@ quizEl.addEventListener("click", function (event) {
         showNextQuestion();
     }
 });
-//TODO: on click in quiz div, switch to next question
-//TODO: on click in quiz div, check for correct answer and display correctness div
-//TODO: decrement seconds left for wrong answer
-//TODO: clear interval, hide quiz div, and show end game div if all questions have been answered
+
+
+//TODO: decrement seconds left for wrong answer 5sec?
+
 
 // Calls function to show game over div
 function endGame() {
@@ -140,7 +142,33 @@ function endGame() {
     clearInterval(timerInterval);
 }
 
-//TODO: grab user info from end game div and write to local storage
+highScores = []
+
+//grabs user info from end game div and writes to local storage
+function storeHighScores() {
+    // Stringify and set key in localStorage to highScores array
+
+    localStorage.setItem("score", JSON.stringify(highScores));
+}
+
+// Add submit event to form
+submitEl.addEventListener("click", function (event) {
+    event.preventDefault();
+    var score = playerInitials.value.toUpperCase() + " - " + secondsLeft;
+    // Return from function early if submitted todoText is blank
+    if (playerInitials === "") {
+        return;
+    }
+
+    // Add new playerInitials to highScores array, clear the input
+    highScores.push(score);
+    playerInitials.value = "";
+
+    // Store updated scores in localStorage, re-render the list
+    storeHighScores();
+    console.log(score);
+    // renderHighScores();
+});
 
 //TODO: on click in high scores page, clear local storage
 //TODO: on click in high scores page, go back to landing div
