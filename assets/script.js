@@ -1,10 +1,17 @@
 //selecting elements by id
 var timeEl = document.querySelector("#time");
 var quizEl = document.querySelector("#quiz");
+var question = document.querySelector("#question");
+var btn0 = document.querySelector("#a0");
+var btn1 = document.querySelector("#a1");
+var btn2 = document.querySelector("#a2");
+var btn3 = document.querySelector("#a3");
 var startEl = document.querySelector("#start");
 var endEl = document.querySelector("#end");
 var correctnessEl = document.querySelector("#correctness");
 var resetHighscores = document.querySelector("#reset");
+
+var currentQuestion = 0;
 
 //TODO: fetch high scores from local storage and display on high scores page
 
@@ -12,7 +19,8 @@ var resetHighscores = document.querySelector("#reset");
 document.querySelector("#startBtn").addEventListener("click", function () {
     quizEl.removeAttribute("class", "hide");
     startEl.setAttribute("class", "hide");
-    setTime()
+    setTime();
+    showNextQuestion();
 });
 
 var secondsLeft = 100;
@@ -82,6 +90,20 @@ var questions = [
         key: 0
     },
 ];
+
+function showNextQuestion() {
+    question.textContent = questions[currentQuestion].q;
+    btn0.textContent = questions[currentQuestion].a[0];
+    btn1.textContent = questions[currentQuestion].a[1];
+    btn2.textContent = questions[currentQuestion].a[2];
+    btn3.textContent = questions[currentQuestion].a[3];
+    currentQuestion++;
+    if (currentQuestion > 9) {
+        endGame();
+    };
+};
+
+quizEl.addEventListener("click", showNextQuestion);
 //TODO: on click in quiz div, switch to next question
 //TODO: on click in quiz div, check for correct answer and display correctness div
 //TODO: decrement seconds left for wrong answer
@@ -89,7 +111,9 @@ var questions = [
 
 // Calls function to show game over div
 function endGame() {
-    //TODO: hide quiz div and show end game div
+    // hide quiz div and show end game div
+    quizEl.setAttribute("class", "hide");
+    endEl.removeAttribute("class", "hide");
     //TODO: show high scores page/modal
     // Stops timer
     clearInterval(timerInterval);
