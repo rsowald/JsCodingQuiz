@@ -28,23 +28,26 @@
             Scores</button>
         <span id="timerText">⏱ Time: <span id="time">--</span></span>
     </nav>
+    <!-- Centered container -->
     <main class="container">
         <div class="row">
             <div class="col align-self-center">
+                <!-- landing/start page -->
                 <section id="start">
                     <h1>Welcome to the Javascript Fundamentals Quiz!</h1>
                     <p>You have 60 seconds to answer 10 questions. A wrong answer will lose you an extra 3 seconds, so
                         don't be wrong! See if you can earn a spot at the top of the leader board.</p>
                     <button id="startBtn" type="button" class="btn btn-outline-info">Start Quiz</button>
                 </section>
+                <!-- quiz div that shows when start button is clicked -->
                 <section id="quiz" class="hide">
                     <h1 id="question"></h1>
-                    <button type="button" id="a0" class="btn btn-outline-info"></button>
-                    <button type="button" id="a1" class="btn btn-outline-info"></button>
-                    <button type="button" id="a2" class="btn btn-outline-info"></button>
-                    <button type="button" id="a3" class="btn btn-outline-info"></button>
+                    <button type="button" id="a0" class="btn btn-outline-info" value=0></button>
+                    <button type="button" id="a1" class="btn btn-outline-info" value=1></button>
+                    <button type="button" id="a2" class="btn btn-outline-info" value=2></button>
+                    <button type="button" id="a3" class="btn btn-outline-info" value=3></button>
                 </section>
-                <!-- Maybe make this end game div a modal? -->
+                <!-- end game div that shows when time is up or all questions are answered -->
                 <section id="end" class="hide">
                     <h2>You're all done!</h2>
                     <p>Your final Score is <span id="score"></span>.</p>
@@ -52,10 +55,10 @@
                     <input id="playerName" type="text">
                     <button id="submit" type="button" class="btn btn-outline-info">Submit</button>
                 </section>
+                <!-- div to display whether an answer was correct or wrong. Will appear when an answer button is clicked -->
                 <div id="correctness" class="alert alert-light" role="alert">
                 </div>
-                <!-- Or maybe add a high scores modal instead of a separate high scores page? -->
-                <!-- Vertically centered scrollable modal -->
+                <!-- Vertically centered scrollable high scores modal -->
                 <div class="modal fade" tabindex="-1" id="highscores">
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">

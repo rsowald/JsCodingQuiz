@@ -11,7 +11,7 @@ var endEl = document.querySelector("#end");
 var correctnessEl = document.querySelector("#correctness");
 var resetHighscores = document.querySelector("#reset");
 
-var currentQuestion = 0;
+var currentQuestion = -1;
 
 //TODO: fetch high scores from local storage and display on high scores page
 
@@ -92,18 +92,39 @@ var questions = [
 ];
 
 function showNextQuestion() {
+    currentQuestion++;
     if (currentQuestion > 9) {
         endGame();
+        return;
     };
     question.textContent = questions[currentQuestion].q;
     btn0.textContent = questions[currentQuestion].a[0];
     btn1.textContent = questions[currentQuestion].a[1];
     btn2.textContent = questions[currentQuestion].a[2];
     btn3.textContent = questions[currentQuestion].a[3];
-    currentQuestion++;
+
 };
 
-quizEl.addEventListener("click", showNextQuestion);
+function checkAnswer(answer) {
+    var value = answer.value;
+    if (value == questions[currentQuestion].key) {
+        correctnessEl.textContent = "Correct!";
+    }
+    else {
+        correctnessEl.textContent = "Wrong 🙁"
+    }
+}
+//Hide correctness div after a timeout?
+quizEl.addEventListener("click", function (event) {
+    var answer = event.target;
+
+
+    if (answer.matches("button")) {
+        checkAnswer(answer);
+        correctnessEl.removeAttribute("class", "hide");
+        showNextQuestion();
+    }
+});
 //TODO: on click in quiz div, switch to next question
 //TODO: on click in quiz div, check for correct answer and display correctness div
 //TODO: decrement seconds left for wrong answer
@@ -124,10 +145,3 @@ function endGame() {
 //TODO: on click in high scores page, clear local storage
 //TODO: on click in high scores page, go back to landing div
 
-quizEl.addEventListener("click", function (event) {
-    var answer = event.target;
-
-    if (answer.matches("button")) {
-
-    }
-});
