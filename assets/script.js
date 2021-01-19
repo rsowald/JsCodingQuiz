@@ -92,15 +92,15 @@ var questions = [
 ];
 
 function showNextQuestion() {
+    if (currentQuestion > 9) {
+        endGame();
+    };
     question.textContent = questions[currentQuestion].q;
     btn0.textContent = questions[currentQuestion].a[0];
     btn1.textContent = questions[currentQuestion].a[1];
     btn2.textContent = questions[currentQuestion].a[2];
     btn3.textContent = questions[currentQuestion].a[3];
     currentQuestion++;
-    if (currentQuestion > 9) {
-        endGame();
-    };
 };
 
 quizEl.addEventListener("click", showNextQuestion);
