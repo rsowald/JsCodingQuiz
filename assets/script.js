@@ -9,15 +9,17 @@ $(document).ready(function () {
     var btn3 = document.querySelector("#a3");
     var startEl = document.querySelector("#start");
     var endEl = document.querySelector("#end");
+    var scoreSpan = document.querySelector("#score");
     var submitEl = document.querySelector("#submit");
-    var playerInitials = document.querySelector("#playerName");
+    var playerInput = document.querySelector("#playerName");
     var correctnessEl = document.querySelector("#correctness");
     var highScoresEl = document.querySelector("#highScores");
     var resetHighscores = document.querySelector("#reset");
 
-    var currentQuestion = -1;
+    var currentQuestion;
     var highScores = [];
-
+    var secondsLeft;
+    var timerInterval;
 
     //TODO: fetch high scores from local storage and display on high scores page
     function init() {
@@ -52,12 +54,13 @@ $(document).ready(function () {
     document.querySelector("#startBtn").addEventListener("click", function () {
         quizEl.removeAttribute("class", "hide");
         startEl.setAttribute("class", "hide");
+        currentQuestion = -1;
+        secondsLeft = 100;
         setTime();
         showNextQuestion();
     });
 
-    var secondsLeft = 100;
-    var timerInterval;
+
 
     function setTime() {
         timeEl.textContent = secondsLeft;
@@ -169,11 +172,12 @@ $(document).ready(function () {
         // hide quiz div and show end game div
         quizEl.setAttribute("class", "hide");
         endEl.removeAttribute("class", "hide");
-        //TODO: show high scores page/modal
+
         // Stops timer
         clearInterval(timerInterval);
-    }
 
+        scoreSpan.textContent = secondsLeft;
+    }
 
     //grabs user info from end game div and writes to local storage
     function storeHighScores() {
@@ -182,18 +186,26 @@ $(document).ready(function () {
         localStorage.setItem("score", JSON.stringify(highScores));
     }
 
+    resetHighscores.addEventListener("click", function () {
+        localStorage.removeItem("score");
+        highScores = [];
+        renderHighScores();
+    })
+
     // Add submit event to form
     submitEl.addEventListener("click", function (event) {
         event.preventDefault();
-        var score = playerInitials.value.toUpperCase() + " - " + secondsLeft;
+
         // Return from function early if submitted todoText is blank
-        if (playerInitials === "") {
+        if (playerInput.value === "") {
             return;
         }
 
-        // Add new playerInitials to highScores array, clear the input
+        var score = playerInput.value.toUpperCase().trim() + " - " + secondsLeft;
+
+        // Add new score to highScores array, clear the input
         highScores.push(score);
-        playerInitials.value = "";
+        playerInput.value = "";
 
         // Store updated scores in localStorage, re-render the list
         storeHighScores();
