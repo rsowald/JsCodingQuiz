@@ -101,8 +101,11 @@ $(document).ready(function () {
         }
         else {
             correctnessEl.textContent = "Last answer was wrong 🙁";
-            //TODO Yikes major yikes, we got -2 one time... so yikes.
+            // Yikes major yikes. got -30 one test... so need to endGame here if secondsLeft reaches 0 on penalties.
             secondsLeft -= 5;
+            if (secondsLeft <= 0) {
+                endGame();
+            }
         }
 
         //hide correctness text after 2 seconds
@@ -112,7 +115,6 @@ $(document).ready(function () {
         }, 2000);
     }
 
-    //TODO: Hide correctness div after a timeout?
     quizEl.addEventListener("click", function (event) {
         var answer = event.target;
 
