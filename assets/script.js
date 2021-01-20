@@ -14,7 +14,7 @@ $(document).ready(function () {
     var playerInput = document.querySelector("#playerName");
     var correctnessEl = document.querySelector("#correctness");
     var highScoresEl = document.querySelector("#highScores");
-    var resetHighscores = document.querySelector("#reset");
+    var resetHighScores = document.querySelector("#reset");
 
     var currentQuestion;
     var highScores = [];
@@ -74,15 +74,23 @@ $(document).ready(function () {
 
     function showNextQuestion() {
         currentQuestion++;
+
         if (currentQuestion > 9) {
             endGame();
             return;
         };
+
         question.textContent = questions[currentQuestion].q;
         btn0.textContent = questions[currentQuestion].a[0];
         btn1.textContent = questions[currentQuestion].a[1];
         btn2.textContent = questions[currentQuestion].a[2];
         btn3.textContent = questions[currentQuestion].a[3];
+
+        //Don't keep the previously selected button focused
+        btn0.blur();
+        btn1.blur();
+        btn2.blur();
+        btn3.blur();
     };
 
     var hideCorrectnessTimer;
@@ -93,6 +101,7 @@ $(document).ready(function () {
         }
         else {
             correctnessEl.textContent = "Last answer was wrong 🙁";
+            //TODO Yikes major yikes, we got -2 one time... so yikes.
             secondsLeft -= 5;
         }
 
@@ -132,7 +141,7 @@ $(document).ready(function () {
         localStorage.setItem("score", JSON.stringify(highScores));
     }
 
-    resetHighscores.addEventListener("click", function () {
+    resetHighScores.addEventListener("click", function () {
         localStorage.removeItem("score");
         highScores = [];
         renderHighScores();
@@ -160,7 +169,7 @@ $(document).ready(function () {
 
         endEl.setAttribute("class", "hide");
         startEl.removeAttribute("class", "hide");
-        $('#highscores').modal();
+        $('#highScoresModal').modal();
     });
 
     // calls initialize function on page load
