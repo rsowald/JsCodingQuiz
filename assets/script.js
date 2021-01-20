@@ -21,7 +21,7 @@ $(document).ready(function () {
     var secondsLeft;
     var timerInterval;
 
-    //TODO: fetch high scores from local storage and display on high scores page
+
     function init() {
         // Get stored scores from localStorage
         var storedScores = JSON.parse(localStorage.getItem("score"));
@@ -96,7 +96,7 @@ $(document).ready(function () {
             secondsLeft = secondsLeft - 5;
         }
     }
-    //Hide correctness div after a timeout?
+    //TODO: Hide correctness div after a timeout?
     quizEl.addEventListener("click", function (event) {
         var answer = event.target;
 
@@ -117,6 +117,7 @@ $(document).ready(function () {
         // Stops timer
         clearInterval(timerInterval);
 
+        timeEl.textContent = secondsLeft;
         scoreSpan.textContent = secondsLeft;
     }
 
@@ -154,10 +155,9 @@ $(document).ready(function () {
 
         endEl.setAttribute("class", "hide");
         startEl.removeAttribute("class", "hide");
+        $('#highscores').modal();
     });
 
-    //TODO: on click in high scores page, clear local storage
-    //TODO: on click in high scores page, go back to landing div
     // calls initialize function on page load
     init();
 });
