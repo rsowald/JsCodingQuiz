@@ -22,12 +22,7 @@ h1 {
     float: right;
 }
 
-#start {
-    text-align: center;
-    margin-top: 50px;
-}
-
-#quiz {
+#wrapper {
     text-align: center;
     margin-top: 50px;
 }
@@ -36,4 +31,19 @@ h1 {
     display: block;
     margin-bottom: 5px;
     font-weight: bolder;
+}
+
+#question {
+    height: 200px;
+}
+
+#highScores ol {
+    margin-bottom: 0;
+}
+
+#correctness {
+    border-top: solid teal 2px;
+    margin-top: 20px;
+    padding-top: 15px;
+    font-weight: 600;
 }
