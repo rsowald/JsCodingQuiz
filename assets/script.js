@@ -83,23 +83,29 @@ $(document).ready(function () {
         btn1.textContent = questions[currentQuestion].a[1];
         btn2.textContent = questions[currentQuestion].a[2];
         btn3.textContent = questions[currentQuestion].a[3];
-
     };
 
+    var hideCorrectnessTimer;
     function checkAnswer(answer) {
         var value = answer.value;
         if (value == questions[currentQuestion].key) {
-            correctnessEl.textContent = "Last question was correct!";
+            correctnessEl.textContent = "Last answer was correct!";
         }
         else {
-            correctnessEl.textContent = "Last question was wrong 🙁";
-            secondsLeft = secondsLeft - 5;
+            correctnessEl.textContent = "Last answer was wrong 🙁";
+            secondsLeft -= 5;
         }
+
+        //hide correctness text after 2 seconds
+        clearInterval(hideCorrectnessTimer);
+        hideCorrectnessTimer = setTimeout(function () {
+            correctnessEl.setAttribute("class", "hide");
+        }, 2000);
     }
+
     //TODO: Hide correctness div after a timeout?
     quizEl.addEventListener("click", function (event) {
         var answer = event.target;
-
 
         if (answer.matches("button")) {
             checkAnswer(answer);
@@ -121,10 +127,8 @@ $(document).ready(function () {
         scoreSpan.textContent = secondsLeft;
     }
 
-    //grabs user info from end game div and writes to local storage
     function storeHighScores() {
         // Stringify and set key in localStorage to highScores array
-
         localStorage.setItem("score", JSON.stringify(highScores));
     }
 
@@ -143,13 +147,14 @@ $(document).ready(function () {
             return;
         }
 
-        var score = playerInput.value.toUpperCase().trim() + " - " + secondsLeft;
+        var score = `${secondsLeft} - ${playerInput.value.toUpperCase().trim()}`;
 
-        // Add new score to highScores array, clear the input
-        highScores.push(score);
+        // Reset initial input
         playerInput.value = "";
 
-        // Store updated scores in localStorage, re-render the list
+        // Update scores, store updated scores in localStorage, re-render the list
+        highScores.push(score);
+        highScores = highScores.sort().reverse();
         storeHighScores();
         renderHighScores();
 
