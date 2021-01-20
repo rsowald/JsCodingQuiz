@@ -16,28 +16,26 @@ $(document).ready(function () {
     var highScoresEl = document.querySelector("#highScores");
     var resetHighScores = document.querySelector("#reset");
 
+    //a few global variables
     var currentQuestion;
     var highScores = [];
     var secondsLeft;
     var timerInterval;
 
-
+    // Load stored scores from localStorage and render to high scores list on page load
     function init() {
-        // Get stored scores from localStorage
         var storedScores = JSON.parse(localStorage.getItem("score"));
 
-        // If scores were retrieved from localStorage, update the highScores array with it
         if (storedScores !== null) {
             highScores = storedScores;
         }
 
-        // Render scores to the high score modal in DOM
         renderHighScores();
     }
 
-    // The following function renders items in scores list as <li> elements
+    // The following function renders items in High scores list as <li> elements
     function renderHighScores() {
-        // Clear list so scores don't render 
+        // Start with a clear list 
         highScoresEl.innerHTML = "";
         // Render a new li for each score
         for (var i = 0; i < highScores.length; i++) {
@@ -54,6 +52,7 @@ $(document).ready(function () {
     document.querySelector("#startBtn").addEventListener("click", function () {
         quizEl.removeAttribute("class", "hide");
         startEl.setAttribute("class", "hide");
+        //currentQuestion starts at -1 because first click will display 0th question in array and count will be 0 to match
         currentQuestion = -1;
         secondsLeft = 100;
         setTime();
@@ -61,6 +60,7 @@ $(document).ready(function () {
     });
 
     function setTime() {
+        //set timer element to secondsLeft first so it refreshes if staring quiz again without reloading
         timeEl.textContent = secondsLeft;
         timerInterval = setInterval(function () {
             secondsLeft--;
@@ -79,7 +79,7 @@ $(document).ready(function () {
             endGame();
             return;
         };
-
+        //questions array in external questions.js
         question.textContent = questions[currentQuestion].q;
         btn0.textContent = questions[currentQuestion].a[0];
         btn1.textContent = questions[currentQuestion].a[1];
@@ -92,7 +92,7 @@ $(document).ready(function () {
         btn2.blur();
         btn3.blur();
     };
-
+    //This variable need to be global because it needs to carry through the question iterations
     var hideCorrectnessTimer;
     function checkAnswer(answer) {
         var value = answer.value;
@@ -114,7 +114,7 @@ $(document).ready(function () {
             correctnessEl.setAttribute("class", "hide");
         }, 2000);
     }
-
+    //main functionality when interacting with the quiz div
     quizEl.addEventListener("click", function (event) {
         var answer = event.target;
 
@@ -133,7 +133,7 @@ $(document).ready(function () {
 
         // Stops timer
         clearInterval(timerInterval);
-
+        //had to set timer text to counter because it was possible to endGame in a split second before the timer had a chance to update
         timeEl.textContent = secondsLeft;
         scoreSpan.textContent = secondsLeft;
     }
@@ -153,22 +153,22 @@ $(document).ready(function () {
     submitEl.addEventListener("click", function (event) {
         event.preventDefault();
 
-        // Return from function early if submitted todoText is blank
+        // Return from function early if submitted InitialsInput is blank
         if (playerInput.value === "") {
             return;
         }
-
-        var score = `${secondsLeft} - ${playerInput.value.toUpperCase().trim()}`;
+        //put seconds left before initials so array could be sorted
+        var score = secondsLeft + " - " + playerInput.value.toUpperCase().trim();
 
         // Reset initial input
         playerInput.value = "";
 
-        // Update scores, store updated scores in localStorage, re-render the list
+        // Update scores, sort highest to lowest, store updated scores in localStorage, re-render the list
         highScores.push(score);
         highScores = highScores.sort().reverse();
         storeHighScores();
         renderHighScores();
-
+        //go back to landing page in background and pop up the high scores modal
         endEl.setAttribute("class", "hide");
         startEl.removeAttribute("class", "hide");
         $('#highScoresModal').modal();

@@ -55,9 +55,11 @@
                     <section id="end" class="hide">
                         <h2>You're all done!</h2>
                         <p>Your final Score is <span id="score"></span>.</p>
-                        <label for="playerName">Enter initials:</label>
-                        <input id="playerName" type="text">
-                        <button id="submit" type="button" class="btn btn-outline-info">Submit</button>
+                        <form>
+                            <label for="playerName">Enter initials:</label>
+                            <input id="playerName" type="text">
+                            <button id="submit" type="submit" class="btn btn-outline-info">Submit</button>
+                        </form>
                     </section>
                     <!-- div to display whether an answer was correct or wrong. Will appear when an answer button is clicked -->
                     <div id="correctness" class="hide" role="alert">
