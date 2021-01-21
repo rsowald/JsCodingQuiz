@@ -103,7 +103,10 @@ $(document).ready(function () {
             correctnessEl.textContent = "Last answer was wrong 🙁";
             // Yikes major yikes. got -30 one test... so need to endGame here if secondsLeft reaches 0 on penalties.
             secondsLeft -= 5;
-            if (secondsLeft <= 0) {
+            if (secondsLeft < 0) {
+                secondsLeft = 0;
+            }
+            if (secondsLeft === 0) {
                 endGame();
             }
         }
