@@ -15,6 +15,7 @@ $(document).ready(function () {
     var correctnessEl = document.querySelector("#correctness");
     var highScoresEl = document.querySelector("#highScores");
     var resetHighScores = document.querySelector("#reset");
+    var highScoreBtn = document.querySelector("#highScoreBtn")
 
     //a few global variables
     var currentQuestion;
@@ -52,6 +53,7 @@ $(document).ready(function () {
     document.querySelector("#startBtn").addEventListener("click", function () {
         quizEl.removeAttribute("class", "hide");
         startEl.setAttribute("class", "hide");
+        highScoreBtn.classList.add("invisible");
         //currentQuestion starts at -1 because first click will display 0th question in array and count will be 0 to match
         currentQuestion = -1;
         secondsLeft = 100;
@@ -133,7 +135,7 @@ $(document).ready(function () {
         // hide quiz div and show end game div
         quizEl.setAttribute("class", "hide");
         endEl.removeAttribute("class", "hide");
-
+        highScoreBtn.classList.remove("invisible");
         // Stops timer
         clearInterval(timerInterval);
         //had to set timer text to counter because it was possible to endGame in a split second before the timer had a chance to update

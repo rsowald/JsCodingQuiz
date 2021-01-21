@@ -18,6 +18,10 @@ h1 {
     display: none;
 }
 
+.invisible {
+    visibility: hidden;
+}
+
 #timerText {
     float: right;
 }
