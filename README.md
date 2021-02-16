@@ -34,3 +34,6 @@ The high scores link in the header was a real hurdle in this project. The mock-u
 ## Future Features
 - If I wanted to write questions with different answer options (like true or false), it would be better to dynamically create the buttons in the JS so that buttons would only be built for the number of answer items in the array.
 - It would probably be logically better to separate my "start quiz" function from my "next question" so I wouldn't have to start my question counter at -1.
+
+## License
+[MIT](LICENSE)
